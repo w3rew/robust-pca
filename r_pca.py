@@ -1,6 +1,12 @@
 from __future__ import division, print_function
 
 import numpy as np
+from packaging.version import Version
+
+if Version(np.__version__) >= Version("2.0.0"):
+    INFINITY = np.inf
+else:
+    INFINITY = np.Inf
 
 try:
     from pylab import plt
@@ -48,7 +54,7 @@ class R_pca:
 
     def fit(self, tol=None, max_iter=1000, iter_print=100):
         iter = 0
-        err = np.Inf
+        err = INFINITY
         Sk = self.S
         Yk = self.Y
         Lk = np.zeros(self.D.shape)
